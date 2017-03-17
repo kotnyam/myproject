@@ -6,11 +6,11 @@ class Middleware(object):
     def __call__(self, environ, start_response):
         for strng in self.app(environ, start_response):
             if strng.find('<body>') > 0: 
-				yield strng.encode() + "<div class='top'>Middleware TOP</div>".encode()
+		yield strng.encode() + "<div class='top'>Middleware TOP</div>".encode()
             elif strng.find('</body>') > 0: 
-				yield "<div class='bottom'>Middleware BOTTOM</div>".encode() + strng.encode()
+		yield "<div class='bottom'>Middleware BOTTOM</div>".encode() + strng.encode()
             else: 
-				yield strng.encode()
+		yield strng.encode()
 				
 def app(environ, start_response):
     start_response('200 OK', [('Content-type', 'text/HTML')])
